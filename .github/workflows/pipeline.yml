@@ -35,9 +35,19 @@ jobs:
           pip uninstall -y pathspec || true
           pip install --no-cache-dir -r requirements.txt
           pip check
+      - name: Debug and normalize DVC remote path in CI
+        run: |
+          echo "Workspace: $GITHUB_WORKSPACE"
+          echo "DVC config:"
+          cat .dvc/config
+          echo "Remote files present?"
+          ls -R dvc_remote || true
+          dvc remote modify localremote url "$GITHUB_WORKSPACE/dvc_remote"
+          echo "DVC config after override:"
+          cat .dvc/config
       - name: Pull data with DVC
         run: |
-          dvc pull
+          dvc pull -v
 
       - name: Train model and log to MLflow
         run: |
