@@ -14,8 +14,9 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     env:
-        MLFLOW_TRACKING_URI: file:${{ github.workspace }}/mlruns
-        FORCE_ACCURACY: ${{ github.event.inputs.force_accuracy }}
+      MLFLOW_TRACKING_URI: file:${{ github.workspace }}/mlruns
+      FORCE_ACCURACY: ${{ github.event.inputs.force_accuracy }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -100,7 +101,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: mlruns-store
-          path: .
+          path: mlruns
 
       - name: Check threshold in MLflow
         run: |
