@@ -1,0 +1,4 @@
+dvc_remote/** -text
+.dvc/cache/** -text
+*.dvc text eol=lf
+data/iris.csv text eol=lf
